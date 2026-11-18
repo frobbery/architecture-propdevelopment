@@ -1,0 +1,21 @@
+@startuml
+!include ../templates/C4_Context.puml
+
+title PropDevelopment Context Diagram
+
+top to bottom direction
+
+Person(user, "Собственник", "Клиент")
+
+System(propDevelopmentSystem, "PropDevelopment System", "Система для предоставления услуг собственникам")
+
+System_Ext(intercomApi, "SmartIntercom API", "Внешнее АПИ для управления умным домофоном")
+System_Ext(gateApi, "SmartGate API", "Внешнее АПИ для управления умным шлагбаумом")
+
+Rel(user, propDevelopmentSystem, "Управляет шлагбаумом и домофоном")
+Rel(propDevelopmentSystem, intercomApi, "Регистрирует новые устройства, вызывает открытие двери")
+Rel(intercomApi, propDevelopmentSystem, "Транслирует видео, проверяет допуск по биометрии")
+Rel(propDevelopmentSystem, gateApi, "Вызывает открытие шлагбаума")
+Rel(gateApi, propDevelopmentSystem, "Проверяет автоматический допуск машин")
+
+@enduml
